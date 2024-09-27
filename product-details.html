@@ -4,13 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Product-details</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="product-details.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
+    <header class="site-header">
+        <nav class="main-nav">
+            <ul class="nav-links left">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="products.html">Products</a></li>
+            </ul>
+
+            <div class="search-bar">
+                <input type="text" placeholder="Search products">
+                <button type="submit">Search</button>
+            </div>
+
+            <ul class="nav-links right">
                 <li><a href="cart.html">Cart</a></li>
                 <li><a href="login.html">Login</a></li>
                 <li><a href="register.html">Register</a></li>
@@ -21,19 +31,32 @@
     <main>
         <section class="product-details">
             <div class="product-image">
-                
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/1d/Football_Pallo_valmiina-cropped.jpg" alt="Sample Product Image">
             </div>
             <div class="product-info">
                 <h1>Product Name</h1>
-                <p>Description of the product.</p>
-                <p>Price: £xx</p>
-                <button id="add-to-cart">Add to Cart</button>
-            </div>
-        </section>
+                <p class="price">$49.99</p>
+                <p class="description">
+                    This is a sample product description. It provides an overview of the product's features, benefits, and specifications.
+                </p>
+                
+                <button class="add-to-cart">Add to Cart</button>
+                
+                <section class="reviews">
+                    <h2>Customer Reviews</h2>
+                    <div class="review">
+                        <p><strong>John Smith:</strong> ★★★★☆</p>
+                        <p>This product is really good and met my expectations!</p>
+                    </div>
+                    <div class="review">
+                        <p><strong>Jane Smith:</strong> ★★★☆☆</p>
+                        <p>The product is decent, but there’s room for improvement.</p>
+                    </div>
+                </section>
     </main>
 
     <footer>
-        
+        <p>&copy; 2024 Your E-Commerce Project</p>
     </footer>
 </body>
 </html>

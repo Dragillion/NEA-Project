@@ -1,0 +1,117 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+#root, #__next {
+  isolation: isolate;
+}
+/*css reset above*/
+
+.main-nav {
+  display: flex;
+  justify-content: space-between;
+  background-color: #343A40;
+}
+
+.nav-links {
+  display: flex;
+  list-style-type: none;
+  padding:0px;
+  gap:10px;
+}
+
+.nav-links.left {
+  margin-left: 15px;
+}
+
+.nav-links.right {
+  margin-right: 15px;
+}
+
+.nav-links a {
+  text-decoration: none; 
+  color: white;          
+  padding: 10px;      
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #007BFF;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  flex: 1; 
+  max-width: 500px; 
+  margin: 0 15px; 
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc; 
+  border-radius: 99px; 
+  margin-right: 5px;
+}
+
+.search-bar button {
+  padding: 8px 12px;
+  background-color: #007BFF;
+  color: white;
+  border: none; 
+  border-radius: 99px;
+  cursor: pointer; 
+}
+
+.search-bar button:hover {
+  background-color: #0158b4;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+main {
+  flex: 1;
+}
+
+footer {
+  background-color: #343A40;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+
+
+
+  

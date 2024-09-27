@@ -4,13 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Home</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="home.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
+    <header class="site-header">
+        <nav class="main-nav">
+            <ul class="nav-links left">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="products.html">Products</a></li>
+            </ul>
+
+            <div class="search-bar">
+                <input type="text" placeholder="Search products">
+                <button type="submit">Search</button>
+            </div>
+
+            <ul class="nav-links right">
                 <li><a href="cart.html">Cart</a></li>
                 <li><a href="login.html">Login</a></li>
                 <li><a href="register.html">Register</a></li>
@@ -32,7 +42,7 @@
     </main>
 
     <footer>
-        
+        <p>&copy; 2024 Your E-Commerce Project</p>
     </footer>
 </body>
 </html>
