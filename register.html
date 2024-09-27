@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Register</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login-register.css">
 </head>
 <body>
     <nav>
@@ -17,20 +18,28 @@
         </ul>
     </nav>
 
-    <h1>Register</h1>
-    <form action="register-process.html" method="POST">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-        
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        
-        <button type="submit">Register</button>
-    </form>
-    
-    <p>Already have an account? <a href="login.html">Login here</a></p>
+    <div class="container">
+        <h1>Register</h1>
+        <form action="register-process.html" method="POST">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            
+            <label for="confirm-password">Confirm Password:</label>
+            <input type="password" id="confirm-password" name="confirm-password" required>
+            
+            <button type="submit">Register</button>
+        </form>
+    </div>
+
+    <p style="text-align: center;">Already have an account? <a href="login.html">Login here</a></p>
+    <footer>
+        <p>&copy; 2024 E-Commerce Project</p>
+    </footer>
 </body>
 </html>
