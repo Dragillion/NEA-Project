@@ -44,8 +44,7 @@ nav ul li a:hover {
 h1 {
     color: #333;
     margin: 80px 0 20px; 
-    text-align: center; /* Center the text */
-    width: 100%; /* Ensure the h1 takes full width for proper centering */
+    text-align: center;
 }
 
 main {
