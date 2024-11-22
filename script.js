@@ -36,26 +36,6 @@ document.addEventListener('DOMContentLoaded', function () {
             // Initial render of all products
             renderProducts(data);
 
-            // Handle sorting when the user selects a sorting option
-            const sortSelect = document.getElementById('sort');  // Get the sort dropdown
-            sortSelect.addEventListener('change', function () {
-                const selectedSort = sortSelect.value;
-
-                // Sort the products based on the selected option
-                let sortedData = [...data]; // Make a shallow copy of the data to avoid mutating the original array
-
-                if (selectedSort === 'price-asc') {
-                    sortedData.sort((a, b) => a.price - b.price);
-                } else if (selectedSort === 'price-desc') {
-                    sortedData.sort((a, b) => b.price - a.price);
-                } else {
-                    // For 'relevance' leave the array as is 
-                }
-
-                // Render the sorted products
-                renderProducts(sortedData);
-            });
-
         })
         .catch(error => {
             console.error('Error fetching product data:', error);
