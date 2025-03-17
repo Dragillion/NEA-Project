@@ -1,45 +1,56 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const registerForm = document.querySelector('form');
-    
-    registerForm.addEventListener('submit', function (event) {
-        // Get input values
-        const name = document.getElementById('name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('password').value;
-        const confirmPassword = document.getElementById('confirm-password').value;
-        
-        let valid = true;  // Flag to track form validity
-        let errorMessage = '';  // To accumulate error messages
+"use strict";
 
-        // Validate Full Name
-        if (name === '') {
-            valid = false;
-            errorMessage += "Full Name is required.\n";
-        }
+document.addEventListener("DOMContentLoaded", () => {
+  const registerForm = document.querySelector("#register-form");
 
-        // Validate Email using a regular expression
-        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-        if (!emailRegex.test(email)) {
-            valid = false;
-            errorMessage += "Please enter a valid email address.\n";
-        }
+  // Pre-fill email if coming from login
+  const emailFromLogin = new URLSearchParams(window.location.search).get("email");
+  if (emailFromLogin) {
+    document.getElementById("email").value = emailFromLogin;
+  }
 
-        // Validate Password (must be at least 6 characters long)
-        if (password.length < 6) {
-            valid = false;
-            errorMessage += "Password must be at least 6 characters long.\n";
-        }
+  registerForm.addEventListener("submit", async event => {
+    event.preventDefault();
 
-        // Validate Confirm Password (must match password)
-        if (password !== confirmPassword) {
-            valid = false;
-            errorMessage += "Password and Confirm Password must match.\n";
-        }
+    const firstName = document.getElementById("first-name").value.trim();
+    const lastName = document.getElementById("last-name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirm-password").value;
+    const phone = document.getElementById("phone").value.trim();
 
-        // If validation fails, show the error messages
-        if (!valid) {
-            alert(errorMessage);  
-            event.preventDefault();  // Prevent form submission
-        }
-    });
+    // Collect errors in an array
+    const errors = [];
+    if (!validateName(firstName)) errors.push("First Name must only contain letters and spaces.");
+    if (!validateName(lastName)) errors.push("Last Name must only contain letters and spaces.");
+    if (!validateEmail(email)) errors.push("Please enter a valid email address.");
+    if (password.length < 6) errors.push("Password must be at least 6 characters long.");
+    if (password !== confirmPassword) errors.push("Password and Confirm Password must match.");
+    if (phone && !validatePhone(phone)) errors.push("Phone number must be a valid UK number.");
+
+
+    if (errors.length) {
+      alert(errors.join("\n"));
+      return;
+    }
+
+    try {
+      const response = await fetch(`${API_BASE}/auth/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          first_name: firstName,
+          last_name: lastName,
+          email,
+          password,
+          phone,
+        }),
+      });
+      const data = await response.json();
+      alert(response.ok ? "Registration successful!" : (data.error || "Registration failed. Please try again."));
+    } catch (error) {
+      console.error("Error during registration:", error);
+      alert("An error occurred while registering. Please try again.");
+    }
+  });
 });

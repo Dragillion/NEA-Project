@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="checkout.css">
     <script src="checkout.js" defer></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <nav>
@@ -20,16 +21,17 @@
     <main>
     <form action="checkout-process.html" id="checkout-form" method="POST">
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
+        <input type="text" id="name" name="name" autocomplete="on" required>
         
         <label for="address">Address:</label>
-        <input type="text" id="address" name="address" required>
+        <input type="text" id="address" name="address" autocomplete="on" required>
         
         <label for="payment">Payment Method:</label>
         <select id="payment" name="payment" required>
             <option value="credit-card">Credit Card</option>
             <option value="paypal">PayPal</option>
             <option value="debit card">Debit Card</option>
+            <option value="apple pay">Apple Pay</option>
         </select>
         
         <button type="submit">Complete Purchase</button>

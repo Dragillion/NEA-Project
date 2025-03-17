@@ -1,94 +1,60 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const productGrid = document.querySelector('.product-grid');
-    const searchInput = document.querySelector('.search-bar input'); 
+"use strict";
 
-    // Fetch data from FakeStoreAPI
-    fetch('https://fakestoreapi.com/products')
-        .then(response => response.json())  // Parse the response as JSON
-        .then(data => {
-            // Function to render products based on data
-            const renderProducts = (products) => {
-                // Clear the product grid before re-rendering
-                productGrid.innerHTML = '';
+document.addEventListener("DOMContentLoaded", async () => {
+  const productGrid = document.querySelector(".product-grid");
+  const searchInput = document.querySelector(".search-bar input");
+  const token = getToken();
 
-                // Loop through the fetched product data
-                products.forEach(product => {
-                    // Create a new product item container
-                    const productItem = document.createElement('div');
-                    productItem.classList.add('product-item');
-                    productItem.dataset.name = product.title;
+  // Fetch products from the backend and render them
+  const fetchProducts = async () => {
+    try {
+      const products = await fetchJSON(`${API_BASE}/products`);
+      renderProducts(products);
+    } catch (error) {
+      console.error("Error fetching product data:", error);
+    }
+  };
 
-                    // Set the HTML for the product item with clickable link and add to cart button
-                    productItem.innerHTML = `
-                        <a href="product-details.html?id=${product.id}" class="product-link">
-                            <img src="${product.image}" alt="${product.title}">
-                            <h3>${product.title}</h3>
-                            <p class="price">$${product.price}</p>
-                        </a>
-                        <button class="add-to-cart" data-id="${product.id}" data-name="${product.title}" data-price="${product.price}" data-image="${product.image}">Add to Cart</button>
-                    `;
-
-                    // Append the product item to the product grid
-                    productGrid.appendChild(productItem);
-                });
-            };
-
-            // Initial render of all products
-            renderProducts(data);
-
-        })
-        .catch(error => {
-            console.error('Error fetching product data:', error);
-        });
-
-    // Search functionality: Filter products as the user types
-    searchInput.addEventListener('input', function () {
-        const searchTerm = searchInput.value.toLowerCase();  // Get the search term in lowercase
-        const productItems = document.querySelectorAll('.product-item');
-
-        // Loop through the product items and hide/show them based on the search term
-        productItems.forEach(function (item) {
-            const productName = item.dataset.name.toLowerCase();
-            if (productName.includes(searchTerm)) {
-                item.style.display = '';  // Show the product if it matches
-            } else {
-                item.style.display = 'none';  // Hide the product if it doesn't match
-            }
-        });
+  // Render products in the grid
+  const renderProducts = products => {
+    productGrid.innerHTML = "";
+    products.forEach(product => {
+      const productItem = document.createElement("div");
+      productItem.className = "product-item";
+      productItem.dataset.name = product.title.toLowerCase();
+      productItem.innerHTML = `
+        <a href="product-details.html?id=${product.id}" class="product-link">
+          <img src="${product.image}" alt="${product.title}">
+          <h3>${product.title}</h3>
+          <p class="price">$${product.price}</p>
+        </a>
+        <button class="add-to-cart" data-id="${product.id}">Add to Cart</button>
+      `;
+      productGrid.appendChild(productItem);
     });
+  };
 
-    // Add to Cart functionality
-    productGrid.addEventListener('click', function (event) {
-        if (event.target.classList.contains('add-to-cart')) {
-            const productId = event.target.dataset.id;
-            const productName = event.target.dataset.name;
-            const productPrice = event.target.dataset.price;
-            const productImage = event.target.dataset.image;
-
-            // Get the cart from localStorage (or create an empty array if not available)
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-            // Check if the product is already in the cart
-            const existingProduct = cart.find(item => item.id === productId);
-
-            if (existingProduct) {
-                // If the product exists, increase the quantity
-                existingProduct.quantity += 1;
-            } else {
-                // Otherwise, add the new product to the cart
-                cart.push({
-                    id: productId,
-                    name: productName,
-                    price: productPrice,
-                    image: productImage,
-                    quantity: 1
-                });
-            }
-
-            // Save the updated cart back to localStorage
-            localStorage.setItem('cart', JSON.stringify(cart));
-
-            alert(`${productName} has been added to the cart`);
-        }
+  // Search filter: hide products not matching the search term
+  searchInput.addEventListener("input", () => {
+    const searchTerm = searchInput.value.toLowerCase();
+    document.querySelectorAll(".product-item").forEach(item => {
+      item.style.display = item.dataset.name.includes(searchTerm) ? "" : "none";
     });
+  });
+
+  // Add-to-cart event
+  productGrid.addEventListener("click", async event => {
+    if (event.target.classList.contains("add-to-cart")) {
+      const productId = parseInt(event.target.dataset.id, 10);
+      try {
+        await handleAddToCart(productId, token);
+        showNotification("Item added to cart!");
+      } catch (error) {
+        console.error("Error adding product to cart:", error);
+        showNotification("Error adding item to cart.", "error");
+      }
+    }
+  });
+
+  await fetchProducts();
 });

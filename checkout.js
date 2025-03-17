@@ -1,4 +1,5 @@
-document.addEventListener('DOMContentLoaded', function () {
+"use strict";
+document.addEventListener('DOMContentLoaded', async function () {
     const checkoutForm = document.getElementById('checkout-form');  // Get the checkout form
     checkoutForm.addEventListener('submit', function (event) {
         // Get input values
@@ -7,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const payment = document.getElementById('payment').value;
 
         let valid = true;  // Flag to track form validity
-        let errorMessage = '';  // To accumulate error messages
+        let errorMessage = ''; 
 
         // Validate Name (should be at least 3 characters)
         if (name.length < 3) {
@@ -33,4 +34,13 @@ document.addEventListener('DOMContentLoaded', function () {
             event.preventDefault();  // Prevent form submission
         }
     });
+
+    // Retrieve the JWT token from localStorage
+  const token = localStorage.getItem("token");
+
+  // If no token exists, redirect to login page
+  if (!token) {
+    window.location.href = "login.html";
+    return;
+  }
 });

@@ -1,51 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Home</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="home.css">
-    <script src="script.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Home</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="home.css" />
+  <script src="utils.js" defer></script>
+  <script src="script.js" defer></script>
+  <script src="previewCart.js" defer></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
 </head>
 <body>
-    <header class="site-header">
-        <nav class="main-nav">
-            
-            <ul class="nav-links left">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="products.html">Products</a></li>
-            </ul>
+  <header class="site-header">
+    <nav class="main-nav">
+      <ul class="nav-links left">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+      </ul>
 
-            <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Search products">
-                <button type="submit" id="searchButton">Search</button>
-            </div>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search products" />
+        <button type="submit" id="searchButton">Search</button>
+      </div>
 
-            <ul class="nav-links right">
-                <li><a href="cart.html">Cart</a></li>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="register.html">Register</a></li>
-            </ul>
-        </nav>
-    </header>
+      <ul class="nav-links right">
+        <li class="account-dropdown">
+          <i class="fas fa-user" style="font-size: 30px;"></i>
+          <div class="dropdown-content" id="accountDropdown">
+            <!-- Dynamically updated; fallback links below if JS fails -->
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+            <a href="account.html">My Account</a>
+            <a href="http://localhost:3000/api/auth/google/">Sign in with Google</a>
+          </div>
+        </li>
+        <li>
+          <a href="cart.html" class="cart-icon">
+            <i class="fas fa-shopping-cart" style="font-size: 30px;"></i>
+            <span class="cart-count" style="display: none;">0</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
 
-    <main>
-        <section class="hero">
-            <h1>Welcome to "Shop Name"</h1>
-            <p>Your one-stop shop for all things tech!</p>
-            <button><a href="products.html">Shop Now</a></button>
-        </section>
+  <main>
+    <section class="hero">
+      <h1>Welcome to "Shop Name"</h1>
+      <p>Your one-stop shop for all things tech!</p>
+      <button><a href="products.html">Shop Now</a></button>
+    </section>
 
-        <section class="featured-products">
-            <h2>Featured Products</h2>
-            <div class="product-grid">
-                <!-- Product items will be dynamically added here -->
-            </div>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 E-Commerce Project</p>
-    </footer>
+    <section class="featured-products">
+      <h2>Featured Products</h2>
+      <div class="product-grid">
+        <!-- Product items will be dynamically added here -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 E-Commerce Project</p>
+  </footer>
 </body>
 </html>
